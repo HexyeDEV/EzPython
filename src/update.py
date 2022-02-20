@@ -2,7 +2,7 @@ from tkinter import Tk as tk
 from tkinter import Label, messagebox
 import requests
 
-current_version = "0.0.1"
+current_version = "0.0.2"
 
 window = tk()
 window.title("Update")
