@@ -2,7 +2,6 @@ from tkinter import Tk as tk
 from tkinter import Label, messagebox
 import requests
 
-
 window = tk()
 window.title("Update")
 window.geometry("500x500")
