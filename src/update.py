@@ -25,4 +25,5 @@ if req['version'] != current_version:
 else:
     messagebox.showinfo("Update", "No updates available")
     os.system("python3 EzPython.py")
+    window.destroy()
     exit()
