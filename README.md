@@ -1,5 +1,5 @@
 # EzPython
-Use this program to make some simple and easy python files. Beta V0.0.1
+Use this program to make some simple and easy python files.
 
 # Download
 Latest: https://github.com/HexyeDEV/EzPython/releases/tag/0.0.2-beta
