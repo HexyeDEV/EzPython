@@ -1,4 +1,3 @@
-from cProfile import label
 from tkinter import Tk as tk
 from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
