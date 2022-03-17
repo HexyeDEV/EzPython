@@ -1,6 +1,7 @@
 from tkinter import Tk as tk
 from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
+import webbrowser
 
 from click import edit
 
@@ -16,7 +17,7 @@ def new_file(filename, entry):
 def add_print(text, filename, entry):
     file = open(filename, 'a')
     entry.delete(0, 'end')
-    entry.insert(0, "Text to show on console (use {variable_name} to show a variable")
+    entry.insert(0, "Text to show on console")
     file.write(f"print(f\"{text}\")" + "\n")
     file.close()
     messagebox.showinfo("Add text on Console", "Text on Console added", parent=editwindow)
@@ -45,7 +46,7 @@ def add_input(name, value, filename, entry, entry2):
     entry.delete(0, 'end')
     entry2.delete(0, 'end')
     entry.insert(0, 'Input Variable Name')
-    entry2.insert(0, 'Add Input text (use {variable_name} to show a variable)')
+    entry2.insert(0, 'Add Input text')
     var = name
     val = value
     file.write(f"{var} = input(f\"{val}\")" + "\n")
@@ -80,7 +81,7 @@ def open_file(filename, entry):
         Label(editwindow, text=filename[:-3], font=("Arial", 20), bg="#bebebe").pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         textprint = Entry(editwindow)
-        textprint.insert(0, "Text to show on console (use {variable_name} to show a variable")
+        textprint.insert(0, "Text to show on console")
         textprint.pack()
         textprint.bind("<Button-1>", on_click)
         textprint.bind("<FocusIn>", on_click)
@@ -104,11 +105,13 @@ def open_file(filename, entry):
         addinput.bind("<Button-1>", on_click)
         addinput.bind("<FocusIn>", on_click)
         addinptext = Entry(editwindow)
-        addinptext.insert(0, "Add Input text (use {variable_name} to show a variable)")
+        addinptext.insert(0, "Add Input text")
         addinptext.pack()
         addinptext.bind("<Button-1>", on_click)
         addinptext.bind("<FocusIn>", on_click)
         Button(editwindow, text="Add input", command=lambda: add_input(addinput.get(), addinptext.get(), filename, addinput, addinptext)).pack()
+        Label(editwindow, text="", bg="#bebebe").pack()
+        Button(editwindow, text="Wiki Guide", command=lambda: webbrowser.open("https://hexye.gitbook.io/ezpython/", new=2)).pack()
     except Exception as e:
         print(e)
         messagebox.showerror("Open File", "File not found")
