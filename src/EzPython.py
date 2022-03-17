@@ -34,7 +34,13 @@ def add_variable(name, value, filename, entry, entry2):
         try:
             val = float(val)
         except:
-            val = "\"" + val + "\""
+            try:
+                val = list(val)
+            except:
+                try:
+                    val = dict(val)
+                except:
+                    val = "\"" + val + "\""
     file.write(f"{var} = {val}" + "\n")
     file.close()
     messagebox.showinfo("Add variable", "Variable added", parent=editwindow)
