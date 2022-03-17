@@ -2,7 +2,7 @@
 Use this program to make some simple and easy python files.
 
 # Download
-Latest: https://github.com/HexyeDEV/EzPython/releases/tag/0.0.3-beta
+Latest: https://github.com/HexyeDEV/EzPython/releases/latest
 
 Stable: Not ready yet
 
