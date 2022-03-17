@@ -3,8 +3,6 @@ from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
 import webbrowser
 
-from click import edit
-
 window = tk()
 
 
