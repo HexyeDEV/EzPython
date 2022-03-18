@@ -6,6 +6,9 @@ Latest: https://github.com/HexyeDEV/EzPython/releases/latest
 
 Stable: Not ready yet
 
+Once downloaded make sure to have python 3.7 or higher and install every module requested from the applications.
+I'm working to make executable linux and windows files.
+
 # Ideas
 If you have any idea or any feature request, please open an issue, remember that the feature should be useful for a good amount of users and shouldnot be to make something too specific.
 
