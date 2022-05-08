@@ -21,6 +21,8 @@ if req['version'] != current_version:
     new_file = requests.get("https://raw.githubusercontent.com/HexyeDEV/EzPython/main/src/EzPython.py").text
     open("EzPython.py", 'w').write(new_file)
     messagebox.showinfo("Update", "Update installed")
+    window.destroy()
+    os.system("python3 EzPython.py")
     exit()
 else:
     messagebox.showinfo("Update", "No updates available")
