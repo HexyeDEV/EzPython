@@ -1,8 +1,8 @@
 from tkinter import Tk as tk
 from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
-
-from click import edit
+import webbrowser
+import json
 
 window = tk()
 
@@ -16,7 +16,7 @@ def new_file(filename, entry):
 def add_print(text, filename, entry):
     file = open(filename, 'a')
     entry.delete(0, 'end')
-    entry.insert(0, "Text to show on console (use {variable_name} to show a variable")
+    entry.insert(0, "Text to show on console")
     file.write(f"print(f\"{text}\")" + "\n")
     file.close()
     messagebox.showinfo("Add text on Console", "Text on Console added", parent=editwindow)
@@ -35,7 +35,13 @@ def add_variable(name, value, filename, entry, entry2):
         try:
             val = float(val)
         except:
-            val = "\"" + val + "\""
+            try:
+                val = list(val)
+            except:
+                try:
+                    val = dict(val)
+                except:
+                    val = "\"" + val + "\""
     file.write(f"{var} = {val}" + "\n")
     file.close()
     messagebox.showinfo("Add variable", "Variable added", parent=editwindow)
@@ -45,7 +51,7 @@ def add_input(name, value, filename, entry, entry2):
     entry.delete(0, 'end')
     entry2.delete(0, 'end')
     entry.insert(0, 'Input Variable Name')
-    entry2.insert(0, 'Add Input text (use {variable_name} to show a variable)')
+    entry2.insert(0, 'Add Input text')
     var = name
     val = value
     file.write(f"{var} = input(f\"{val}\")" + "\n")
@@ -80,7 +86,7 @@ def open_file(filename, entry):
         Label(editwindow, text=filename[:-3], font=("Arial", 20), bg="#bebebe").pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         textprint = Entry(editwindow)
-        textprint.insert(0, "Text to show on console (use {variable_name} to show a variable")
+        textprint.insert(0, "Text to show on console")
         textprint.pack()
         textprint.bind("<Button-1>", on_click)
         textprint.bind("<FocusIn>", on_click)
@@ -104,11 +110,13 @@ def open_file(filename, entry):
         addinput.bind("<Button-1>", on_click)
         addinput.bind("<FocusIn>", on_click)
         addinptext = Entry(editwindow)
-        addinptext.insert(0, "Add Input text (use {variable_name} to show a variable)")
+        addinptext.insert(0, "Add Input text")
         addinptext.pack()
         addinptext.bind("<Button-1>", on_click)
         addinptext.bind("<FocusIn>", on_click)
         Button(editwindow, text="Add input", command=lambda: add_input(addinput.get(), addinptext.get(), filename, addinput, addinptext)).pack()
+        Label(editwindow, text="", bg="#bebebe").pack()
+        Button(editwindow, text="Wiki Guide", command=lambda: webbrowser.open("https://hexye.gitbook.io/ezpython/", new=2)).pack()
     except Exception as e:
         print(e)
         messagebox.showerror("Open File", "File not found")
@@ -148,6 +156,15 @@ openfilename.pack()
 Button(window, text="Open File", command=lambda: open_file(openfilename.get().replace(" ", "_") + ".py", openfilename)).pack()
 Label(window, text="", bg="#bebebe").pack()
 Button(window, text="Update Software", command=lambda: update(window)).pack()
+inf = json.load(open("inf.json"))
+if inf["acc"] == False:
+    accanswer = messagebox.askokcancel("Do you want to accept our Conditions?", "We may be showing you some fast surveys, data of those surveys will not be used to track you down, but only for building ai machines.\nWe may also show you some ads, but we will not track you down.\n\nIf you accept, click OK, if you don't, click Cancel.", parent=window)
+    if accanswer:
+        inf["acc"] = True
+        json.dump(inf, open("inf.json", "w"))
+        messagebox.showinfo("Accepted", "Thank you for accepting our Conditions", parent=window)
+    else:
+        messagebox.showinfo("Not Accepted", "You have not accepted our Conditions, you can still use the program but we are very sad you won't support us :(", parent=window)
 
 window.mainloop()
 
