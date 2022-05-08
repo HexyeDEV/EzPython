@@ -2,6 +2,7 @@ from tkinter import Tk as tk
 from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
 import webbrowser
+import json
 
 window = tk()
 
@@ -155,6 +156,15 @@ openfilename.pack()
 Button(window, text="Open File", command=lambda: open_file(openfilename.get().replace(" ", "_") + ".py", openfilename)).pack()
 Label(window, text="", bg="#bebebe").pack()
 Button(window, text="Update Software", command=lambda: update(window)).pack()
+inf = json.load(open("inf.json"))
+if inf["acc"] == False:
+    accanswer = messagebox.askokcancel("Do you want to accept our Conditions?", "We may be showing you some fast surveys, data of those surveys will not be used to track you down, but only for building ai machines.\nWe may also show you some ads, but we will not track you down.\n\nIf you accept, click OK, if you don't, click Cancel.", parent=window)
+    if accanswer:
+        inf["acc"] = True
+        json.dump(inf, open("inf.json", "w"))
+        messagebox.showinfo("Accepted", "Thank you for accepting our Conditions", parent=window)
+    else:
+        messagebox.showinfo("Not Accepted", "You have not accepted our Conditions, you can still use the program but we are very sad you won't support us :(", parent=window)
 
 window.mainloop()
 
