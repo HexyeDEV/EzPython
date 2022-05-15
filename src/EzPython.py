@@ -3,6 +3,7 @@ from tkinter import Toplevel, Button, Label, Entry, messagebox
 import os
 import webbrowser
 import json
+import requests
 
 window = tk()
 
@@ -165,7 +166,16 @@ if inf["acc"] == False:
         messagebox.showinfo("Accepted", "Thank you for accepting our Conditions", parent=window)
     else:
         messagebox.showinfo("Not Accepted", "You have not accepted our Conditions, you can still use the program but we are very sad you won't support us :(", parent=window)
-
+if inf["acc"] == True:
+    inf = json.load(open("inf.json"))
+    server_messages = requests.get("https://raw.githubusercontent.com/HexyeDEV/EzPython/main/arc/messages.json").json()
+    for message in server_messages:
+        try:
+            inf[message]
+        except:
+            messagebox.showinfo(message, server_messages[message], parent=window)
+            inf[message] = True
+    json.dump(inf, open("inf.json", "w"))
 window.mainloop()
 
 # --------------------------------------- #
