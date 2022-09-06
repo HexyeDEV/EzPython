@@ -1,8 +1,10 @@
-from tkinter import Tk as tk
-from tkinter import Toplevel, Button, Label, Entry, messagebox
+import json
 import os
 import webbrowser
-import json
+from tkinter import Button, Entry, Label
+from tkinter import Tk as tk
+from tkinter import Toplevel, messagebox
+
 import requests
 
 window = tk()
