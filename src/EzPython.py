@@ -37,10 +37,22 @@ def add_variable(name, value, filename, entry, entry2):
             val = float(val)
         except:
             try:
-                val = list(val)
+                if val.startswith("[") and val.endswith("]"):
+                    val = val.replace("[", "").replace("]", "")
+                    vals = val.split(", ")
+                    i = 0
+                    for val in vals:
+                        vals[i] = val.replace("\"", "")
+                        i += 1
+                    val = vals
+                else:
+                    raise Exception
             except:
                 try:
-                    val = dict(val)
+                    if val.startswith("{\"") and val.endswith("\"}"):
+                        val = json.loads(val)
+                    else:
+                        raise Exception
                 except:
                     val = "\"" + val + "\""
     file.write(f"{var} = {val}" + "\n")
@@ -103,7 +115,7 @@ def open_file(filename, entry):
         addname.pack()
         addname.bind("<Button-1>", on_click)
         addname.bind("<FocusIn>", on_click)
-        Button(editwindow, text="Add variable", command=lambda: add_variable(addname.get(), addvalue.get(), filename, addname, addvalue)).pack()
+        Button(editwindow, text="Add variable", command=lambda: add_variable(addname.get(), addvalue.get(), filename, addvalue, addname)).pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         addinput = Entry(editwindow)
         addinput.insert(0, "Input Variable Name")
