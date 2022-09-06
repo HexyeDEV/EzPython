@@ -1,9 +1,12 @@
 import json
 import os
 import webbrowser
-from tkinter import Button, Entry, Label
+from tkinter import Button
+from tkinter import Entry
+from tkinter import Label
+from tkinter import messagebox
 from tkinter import Tk as tk
-from tkinter import Toplevel, messagebox
+from tkinter import Toplevel
 
 import requests
 
