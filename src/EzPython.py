@@ -1,15 +1,14 @@
-import customtkinter
-from customtkinter import (
-    CTkToplevel as Toplevel,
-    CTkButton as Button,
-    CTkLabel as Label,
-    CTkEntry as Entry,
-)
-from tkinter import messagebox
+import json
 import os
 import webbrowser
-import json
+from tkinter import messagebox
+
+import customtkinter
 import requests
+from customtkinter import CTkButton as Button
+from customtkinter import CTkEntry as Entry
+from customtkinter import CTkLabel as Label
+from customtkinter import CTkToplevel as Toplevel
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")

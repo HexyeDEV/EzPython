@@ -1,9 +1,10 @@
-from tkinter import Tk as tk
-import customtkinter
-from customtkinter import CTkLabel as Label
-from tkinter import messagebox
-import requests
 import os
+from tkinter import Tk as tk
+from tkinter import messagebox
+
+import customtkinter
+import requests
+from customtkinter import CTkLabel as Label
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
