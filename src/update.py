@@ -16,17 +16,19 @@ Label(window, text="Update", text_font=("Arial", 20), bg="#bebebe").pack()
 Label(window, text="", bg="#bebebe").pack()
 Label(window, text="Looking for updates...", bg="#bebebe").pack()
 req = requests.get(
-    "https://raw.githubusercontent.com/HexyeDEV/EzPython/main/version.json").json()
+    "https://raw.githubusercontent.com/HexyeDEV/EzPython/main/version.json"
+).json()
 
 current_version = open("version.txt", "r").read()
 f = open("version.txt", "w")
 
-if req['version'] != current_version:
+if req["version"] != current_version:
     messagebox.showinfo("Update", "Update available, Installing it Now")
-    f.write(req['version'])
+    f.write(req["version"])
     new_file = requests.get(
-        "https://raw.githubusercontent.com/HexyeDEV/EzPython/main/src/EzPython.py").text
-    open("EzPython.py", 'w').write(new_file)
+        "https://raw.githubusercontent.com/HexyeDEV/EzPython/main/src/EzPython.py"
+    ).text
+    open("EzPython.py", "w").write(new_file)
     messagebox.showinfo("Update", "Update installed")
     window.destroy()
     os.system("python3 EzPython.py")
