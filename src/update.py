@@ -1,13 +1,17 @@
 from tkinter import Tk as tk
-from tkinter import Label, messagebox
+import customtkinter
+from customtkinter import CTkLabel as Label
+from tkinter import messagebox
 import requests, os
 
-window = tk()
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("green")
+
+window = customtkinter.CTk()
 window.title("Update")
 window.geometry("500x500")
 window.resizable(False, False)
-window.configure(background="#bebebe")
-Label(window, text="Update", font=("Arial", 20), bg="#bebebe").pack()
+Label(window, text="Update", text_font=("Arial", 20), bg="#bebebe").pack()
 Label(window, text="", bg="#bebebe").pack()
 Label(window, text="Looking for updates...", bg="#bebebe").pack()
 req = requests.get("https://raw.githubusercontent.com/HexyeDEV/EzPython/main/version.json").json()
