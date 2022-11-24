@@ -29,9 +29,9 @@ def add_print(text, filename, entry):
     entry.insert(0, "Text to show on console")
     file.write(f'print(f"{text}")' + "\n")
     file.close()
-    messagebox.showinfo(
-        "Add text on Console", "Text on Console added", parent=editwindow
-    )
+    messagebox.showinfo("Add text on Console",
+                        "Text on Console added",
+                        parent=editwindow)
 
 
 def add_variable(name, value, filename, entry, entry2):
@@ -111,9 +111,10 @@ def open_file(filename, entry):
         editwindow.title(filename[:-3])
         editwindow.geometry("750x750")
         editwindow.resizable(False, False)
-        Label(
-            editwindow, text=filename[:-3], text_font=("Arial", 20), bg="#bebebe"
-        ).pack()
+        Label(editwindow,
+              text=filename[:-3],
+              text_font=("Arial", 20),
+              bg="#bebebe").pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         textprint = Entry(editwindow)
         textprint.insert(0, "Text to show on console")
@@ -139,9 +140,8 @@ def open_file(filename, entry):
         Button(
             editwindow,
             text="Add variable",
-            command=lambda: add_variable(
-                addname.get(), addvalue.get(), filename, addvalue, addname
-            ),
+            command=lambda: add_variable(addname.get(), addvalue.get(),
+                                         filename, addvalue, addname),
         ).pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         addinput = Entry(editwindow)
@@ -157,17 +157,15 @@ def open_file(filename, entry):
         Button(
             editwindow,
             text="Add input",
-            command=lambda: add_input(
-                addinput.get(), addinptext.get(), filename, addinput, addinptext
-            ),
+            command=lambda: add_input(addinput.get(), addinptext.get(),
+                                      filename, addinput, addinptext),
         ).pack()
         Label(editwindow, text="", bg="#bebebe").pack()
         Button(
             editwindow,
             text="Wiki Guide",
             command=lambda: webbrowser.open(
-                "https://hexye.gitbook.io/ezpython/", new=2
-            ),
+                "https://hexye.gitbook.io/ezpython/", new=2),
         ).pack()
     except Exception as e:
         print(e)
@@ -191,7 +189,6 @@ def update(window):
 # --------------------------------------- #
 # --------------------------------------- #
 
-
 # Main Window
 window.geometry("750x750")
 window.title("EzPython")
@@ -214,8 +211,8 @@ Button(
     window,
     text="Open File",
     command=lambda: open_file(
-        openfilename.get().replace(" ", "_").replace(".py", "") + ".py", openfilename
-    ),
+        openfilename.get().replace(" ", "_").replace(".py", "") + ".py",
+        openfilename),
 ).pack()
 Label(window, text="", bg="#bebebe").pack()
 Button(window, text="Update Software", command=lambda: update(window)).pack()
@@ -229,9 +226,9 @@ if inf["acc"] == False:
     if accanswer:
         inf["acc"] = True
         json.dump(inf, open("inf.json", "w"))
-        messagebox.showinfo(
-            "Accepted", "Thank you for accepting our Conditions", parent=window
-        )
+        messagebox.showinfo("Accepted",
+                            "Thank you for accepting our Conditions",
+                            parent=window)
     else:
         messagebox.showinfo(
             "Not Accepted",
@@ -247,7 +244,9 @@ if inf["acc"] == True:
         try:
             inf[message]
         except:
-            messagebox.showinfo(message, server_messages[message], parent=window)
+            messagebox.showinfo(message,
+                                server_messages[message],
+                                parent=window)
             inf[message] = True
     json.dump(inf, open("inf.json", "w"))
 window.mainloop()
