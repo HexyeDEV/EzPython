@@ -1,6 +1,6 @@
 import os
-from tkinter import Tk as tk
 from tkinter import messagebox
+from tkinter import Tk as tk
 
 import customtkinter
 import requests
