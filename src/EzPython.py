@@ -5,6 +5,7 @@ import os
 import webbrowser
 import json
 import requests
+import sys
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
@@ -99,15 +100,15 @@ def open_file(filename, entry):
         editwindow.title(filename[:-3])
         editwindow.geometry("750x750")
         editwindow.resizable(False, False)
-        Label(editwindow, text=filename[:-3], text_font=("Arial", 20), bg="#bebebe").pack()
-        Label(editwindow, text="", bg="#bebebe").pack()
+        Label(editwindow, text=filename[:-3], font=("Arial", 20), bg_color="#bebebe").pack()
+        Label(editwindow, text="", bg_color="#bebebe").pack()
         textprint = Entry(editwindow)
         textprint.insert(0, "Text to show on console")
         textprint.pack()
         textprint.bind("<Button-1>", on_click)
         textprint.bind("<FocusIn>", on_click)
         Button(editwindow, text="Add text on Console", command=lambda: add_print(textprint.get(), filename, textprint)).pack()
-        Label(editwindow, text="", bg="#bebebe").pack()
+        Label(editwindow, text="", bg_color="#bebebe").pack()
         addvalue = Entry(editwindow)
         addvalue.insert(0, "Variable Value")
         addvalue.pack()
@@ -119,7 +120,7 @@ def open_file(filename, entry):
         addname.bind("<Button-1>", on_click)
         addname.bind("<FocusIn>", on_click)
         Button(editwindow, text="Add variable", command=lambda: add_variable(addname.get(), addvalue.get(), filename, addvalue, addname)).pack()
-        Label(editwindow, text="", bg="#bebebe").pack()
+        Label(editwindow, text="", bg_color="#bebebe").pack()
         addinput = Entry(editwindow)
         addinput.insert(0, "Input Variable Name")
         addinput.pack()
@@ -131,7 +132,7 @@ def open_file(filename, entry):
         addinptext.bind("<Button-1>", on_click)
         addinptext.bind("<FocusIn>", on_click)
         Button(editwindow, text="Add input", command=lambda: add_input(addinput.get(), addinptext.get(), filename, addinput, addinptext)).pack()
-        Label(editwindow, text="", bg="#bebebe").pack()
+        Label(editwindow, text="", bg_color="#bebebe").pack()
         Button(editwindow, text="Wiki Guide", command=lambda: webbrowser.open("https://hexye.gitbook.io/ezpython/", new=2)).pack()
     except Exception as e:
         print(e)
@@ -144,7 +145,8 @@ def open_file(filename, entry):
 # Update Command
 def update(window):
     window.destroy()
-    os.system("python3 update.py")
+    python = sys.executable
+    os.system(f"{python} update.py")
     exit()
 
 # --------------------------------------- #
@@ -158,18 +160,18 @@ def update(window):
 window.geometry("750x750")
 window.title("EzPython")
 window.resizable(False, False)
-Label(window, text="EzPython", text_font=("Arial", 20), bg="#bebebe").pack()
-Label(window, text="", bg="#bebebe").pack()
-Label(window, text="New File Name", bg="#bebebe").pack()
+Label(window, text="EzPython", font=("Arial", 20), bg_color="#bebebe").pack()
+Label(window, text="", bg_color="#bebebe").pack()
+Label(window, text="New File Name", bg_color="#bebebe").pack()
 filename = Entry(window)
 filename.pack()
 Button(window, text="New File", command=lambda: new_file(filename.get().replace(" ", "_"), filename)).pack()
-Label(window, text="", bg="#bebebe").pack()
-Label(window, text="Open File Name", bg="#bebebe").pack()
+Label(window, text="", bg_color="#bebebe").pack()
+Label(window, text="Open File Name", bg_color="#bebebe").pack()
 openfilename = Entry(window)
 openfilename.pack()
 Button(window, text="Open File", command=lambda: open_file(openfilename.get().replace(" ", "_").replace(".py", "") + ".py", openfilename)).pack()
-Label(window, text="", bg="#bebebe").pack()
+Label(window, text="", bg_color="#bebebe").pack()
 Button(window, text="Update Software", command=lambda: update(window)).pack()
 inf = json.load(open("inf.json"))
 if inf["acc"] == False:
